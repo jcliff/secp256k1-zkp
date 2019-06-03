@@ -80,8 +80,9 @@ void musig_api_tests(secp256k1_scratch_space *scratch) {
     CHECK(ecount == 2);
     /* If a scratch space is given it shouldn't be too small */
     scratch_small = secp256k1_scratch_space_create(ctx, 1);
+    /* TODO: This assertion seems to fail or at least be flaky on OSX */
     CHECK(secp256k1_musig_pubkey_combine(vrfy, scratch_small, &combined_pk, pk_hash, pk, 2) == 0);
-    secp256k1_scratch_space_destroy(scratch_small);
+    secp256k1_scratch_space_destroy(ctx, scratch_small);
     CHECK(ecount == 2);
     CHECK(secp256k1_musig_pubkey_combine(vrfy, scratch, NULL, pk_hash, pk, 2) == 0);
     CHECK(ecount == 3);
@@ -751,7 +752,7 @@ void run_musig_tests(void) {
     }
     sha256_tag_test();
 
-    secp256k1_scratch_space_destroy(scratch);
+    secp256k1_scratch_space_destroy(ctx, scratch);
 }
 
 #endif

@@ -2,6 +2,7 @@
 #define SECP256K1_MUSIG_H
 
 #include <stdint.h>
+#include "secp256k1_schnorrsig.h"
 
 /** This module implements a Schnorr-based multi-signature scheme called MuSig
  * (https://eprint.iacr.org/2018/068.pdf). There's an example C source file in the
